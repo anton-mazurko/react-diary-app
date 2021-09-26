@@ -3,6 +3,7 @@ import _ from 'lodash';
 import {connect} from 'react-redux';
 import {getNotes, saveNote, deleteNote} from '../actions/notesAction';
 import NoteCard from './NoteCard'
+import {getUser} from '../actions/userAction';
 require('../firebase')
 
 
@@ -23,6 +24,7 @@ class App extends Component {
 
   componentDidMount () {
     this.props.getNotes();
+    this.props.getUser();
   }
 
   handleChange(e) {
@@ -106,8 +108,9 @@ class App extends Component {
 
 function mapStateToProps (state, ownProps) {
   return {
-    notes: state.notes
+    notes: state.notes,
+    user: state.user
   }
 }
 
-export default connect(mapStateToProps, {getNotes, saveNote, deleteNote}) (App);
+export default connect(mapStateToProps, {getNotes, saveNote, deleteNote, getUser}) (App);

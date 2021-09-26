@@ -1,4 +1,4 @@
-import {GET_NOTES} from '../actionTypes'
+import {GET_NOTES, NOTES_STATUS} from '../actionTypes'
 import { getDatabase, ref, onValue, set, remove } from "firebase/database";
 import { uuidv4 } from '../common';
 
@@ -7,11 +7,27 @@ import { uuidv4 } from '../common';
 export function getNotes() {
   const db = getDatabase();
   const notesRef = ref(db, '/notes');
+
   return dispatch => {
+    dispatch({
+      type: NOTES_STATUS,
+      payload: true
+    })
+
     onValue(notesRef, (snapshot) => {
       dispatch({
         type: GET_NOTES,
         payload: snapshot.val()
+      })
+      // once notes are received show loading to false
+      dispatch({
+        type: NOTES_STATUS,
+        payload: false
+      })
+    }, (error) => {
+      dispatch({
+        type: NOTES_STATUS,
+        payload: -1
       })
     })
   }
