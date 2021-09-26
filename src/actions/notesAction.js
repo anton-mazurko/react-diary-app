@@ -1,42 +1,33 @@
-// import {GET_NOTES} from '../actionTypes'
-// import {database} from '../firebase'
+import {GET_NOTES} from '../actionTypes'
+import { getDatabase, ref, onValue, set, remove } from "firebase/database";
+import { uuidv4 } from '../common';
 
-import { GET_NOTES } from "../actionTypes"
 
+// Web version 9: https://firebase.google.com/docs/database/web/read-and-write#web-version-9_1
 export function getNotes() {
-  // return dispatch() => {
-  //   database.on('value', snapshot => {
-  //     dispatch({
-  //       type: GET_NOTES,
-  //       payload: snapshot.val()
-  //     })
-  //   })
-
+  const db = getDatabase();
+  const notesRef = ref(db, '/notes');
   return dispatch => {
-    dispatch({
-      type: GET_NOTES,
-      payload: [{'title': 'Some title', 'body': 'Some body'}, {'title': 'Some title2', 'body': 'Some body2'}]
-    });
+    onValue(notesRef, (snapshot) => {
+      dispatch({
+        type: GET_NOTES,
+        payload: snapshot.val()
+      })
+    })
   }
 }
 
-// export const getNotes = () => dispatch => {
-//   dispatch({
-//     type: 'GET_NOTES',
-//     payload: [{'title': 'a', 'body': 'a'}]
-//   })
-// }
-
 export function saveNote (note) {
-  // return dispatch => database.push(note);
-  return dispatch => {
-    console.log(`Save note to db: ${note.title} ${note.body}`)
+  const db = getDatabase();
+  const noteId = uuidv4();
+  return () => {
+    set(ref(db, `/notes/${noteId}`), note);
   }
 }
 
 export function deleteNote (id) {
-  // return dispatch => database.child(id).remove();
-  return dispatch => {
-    console.log(`Remove note with id: ${id}`)
+  const db = getDatabase();
+  return () => {
+    remove(ref(db, `/notes/${id}`))
   }
 }

@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
-// import {database} from './firebase';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import {getNotes, saveNote, deleteNote} from '../actions/notesAction';
 import NoteCard from './NoteCard'
+require('../firebase')
 
 
 class App extends Component {
-
-
   constructor(props) {
     super(props);
     // state
     this.state = {
       title: '',
       body: '',
-      notes: []
+      notes: {}
     }
     //bind
     this.handleChange = this.handleChange.bind(this);
