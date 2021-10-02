@@ -22,10 +22,6 @@ class App extends Component {
     this.renderNotes = this.renderNotes.bind(this);
   }
 
-  // componentDidMount () {
-  //   this.props.getNotes();
-  //   this.props.getUser();
-  // }
 
   handleChange(e) {
     this.setState({
@@ -96,7 +92,9 @@ class App extends Component {
               </div>
             </form>
 
-
+            <br/>
+            <br/>
+            <br/>
             {this.renderNotes()}
 
           </div>
