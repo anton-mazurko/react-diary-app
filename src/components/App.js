@@ -22,10 +22,10 @@ class App extends Component {
     this.renderNotes = this.renderNotes.bind(this);
   }
 
-  componentDidMount () {
-    this.props.getNotes();
-    this.props.getUser();
-  }
+  // componentDidMount () {
+  //   this.props.getNotes();
+  //   this.props.getUser();
+  // }
 
   handleChange(e) {
     this.setState({

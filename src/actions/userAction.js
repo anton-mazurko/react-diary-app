@@ -3,8 +3,9 @@ import { GET_USER, USER_STATUS } from "../actionTypes";
 
 
 export function getUser () {
-  const auth = getAuth();
+  
   return dispatch => {
+    const auth = getAuth();
     // show loading status before getting user to true
     dispatch({
       type: USER_STATUS,
@@ -14,13 +15,13 @@ export function getUser () {
       dispatch({
         type: GET_USER,
         payload: user
-      })
+      });
       // show loading status to false
       dispatch({
         type: USER_STATUS,
         payload: false
-      })
-    })
+      });
+    });
   }
 }
 

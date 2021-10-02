@@ -12,25 +12,25 @@ export function getNotes() {
     dispatch({
       type: NOTES_STATUS,
       payload: true
-    })
+    });
 
     onValue(notesRef, (snapshot) => {
       dispatch({
         type: GET_NOTES,
         payload: snapshot.val()
-      })
+      });
       // once notes are received show loading to false
       dispatch({
         type: NOTES_STATUS,
         payload: false
-      })
-    }, (error) => {
+      });
+    }, () => {
       dispatch({
         type: NOTES_STATUS,
         payload: -1
-      })
-    })
-  }
+      });
+    });
+  };
 }
 
 export function saveNote (note) {
