@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {editNote} from '../actions/notesAction';
 
- 
  
 class NoteEdit extends Component {
   constructor(props) {
@@ -27,17 +27,17 @@ class NoteEdit extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('submit')
     const note = {
       title: this.state.title,
       body: this.state.body,
       uid: this.props.uid
     }
-    // this.props.saveNote(note)
+    this.props.editNote(this.props.match.params.id, note);
     this.setState({
       title: '',
       body: ''
     });
+    this.props.history.push('/')
   }
 
 
@@ -90,4 +90,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(NoteEdit);
+export default connect(mapStateToProps, {editNote})(NoteEdit);

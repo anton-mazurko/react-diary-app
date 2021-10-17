@@ -1,5 +1,5 @@
 import {GET_NOTES, NOTES_STATUS} from '../actionTypes'
-import { getDatabase, ref, onValue, set, remove } from "firebase/database";
+import { getDatabase, ref, onValue, set, remove, update} from "firebase/database";
 import { uuidv4 } from '../common';
 
 
@@ -38,6 +38,13 @@ export function saveNote (note) {
   const noteId = uuidv4();
   return () => {
     set(ref(db, `/notes/${noteId}`), note);
+  }
+}
+
+export function editNote (id, note) {
+  const db = getDatabase();
+  return () => {
+    update(ref(db, `/notes/${id}`), note);
   }
 }
 
