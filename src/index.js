@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import rootReducer from './reducers';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import Login from './components/Login'
 import Header from './routes/Header'
 import LoadingComponent from './components/LoadingComponent';
@@ -35,6 +35,7 @@ ReactDOM.render(
           <div>
             <Switch>
               <Route path="/login" component={Login} exact={true} />
+              <Redirect from="/logout" to="/login" />
               <AuthenticatedComponent>
                 <Header/>
                 <Route path="/:id/edit" component={NoteEdit} exact={true} />
