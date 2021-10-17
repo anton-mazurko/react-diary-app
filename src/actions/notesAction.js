@@ -47,3 +47,11 @@ export function deleteNote (id) {
     remove(ref(db, `/notes/${id}`))
   }
 }
+
+export function saveComment(noteId, comment) {
+  const db = getDatabase();
+  const commentId = uuidv4();
+  return () => {
+    set(ref(db, `/notes/${noteId}/comments/${commentId}`), comment);
+  }
+}
