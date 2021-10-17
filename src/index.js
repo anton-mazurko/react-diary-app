@@ -17,6 +17,7 @@ import LoadingComponent from './components/LoadingComponent';
 import AuthenticatedComponent from './components/AuthenticatedComponent';
 import NoteDetail from './components/NoteDetail';
 import NoteEdit from './components/NoteEdit';
+import './styles/index.css';
 
 
 // create redux store -> reducers -> actions - actionType | applyMiddleware
