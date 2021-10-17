@@ -76,7 +76,19 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-sm-10 col-sm-offset-1">
+
+          <div className="col-sm-2 text-center">
+            <img
+              src={this.props.user.photoURL}
+              height="100px"
+              className="img img-responsive circle"
+              style={{padding: '20px'}}
+              alt={this.props.user.displayName}
+              />
+              <h4 className="username">Welcome back {this.props.user.displayName}</h4>
+          </div>
+
+          <div className="col-sm-10">
             <form onSubmit={this.handleSubmit}>
               <div className="form-group">
                 <input 
