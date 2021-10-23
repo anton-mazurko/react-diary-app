@@ -4,6 +4,13 @@ import {withRouter} from 'react-router-dom';
 
 class AuthenticatedComponent extends Component {
   
+  componentDidMount () {
+    const {userLoading, user} = this.props;
+    if (userLoading === false && !user) {
+      this.props.history.push('/login')
+    }
+  }
+
   componentDidUpdate () {
     const {userLoading, user} = this.props;
     if (userLoading === false && !user) {
@@ -24,4 +31,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(AuthenticatedComponent))
+export default withRouter(connect(mapStateToProps)(AuthenticatedComponent));
